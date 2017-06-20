@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+
 import './App.css';
 
 class App extends Component {
@@ -8,7 +11,14 @@ class App extends Component {
         <h1>DevMountain Hackathon</h1>
         <h3>Guest List:</h3>
         <ul>
-          {/*guest list from store*/}
+         {this.props.list.map((guest, i) => {
+           return(
+             <div key={i} className="list-item">
+                <li>{guest}</li>
+                <button type="" className="">Remove</button>
+             </div>
+           )
+         })}
         </ul>
         <div className="add-guest">
           Add guest: <input type="" className=""/>
@@ -19,4 +29,9 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(){
+  return{
+    list: state.guests
+  }
+}
+export default connect(mapStateToProps)(App);
